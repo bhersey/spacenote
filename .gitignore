@@ -63,3 +63,10 @@ typings/
 # IDEA related
 *.iml
 .idea
+
+# build related
+src/App.css
+
+# OSX misc
+.DS_Store
+/design

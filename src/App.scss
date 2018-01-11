@@ -1,5 +1,11 @@
+body {
+  background-color: #161726;
+
+}
+
 .App {
   text-align: center;
+  //margin-left: 10em;
 }
 
 .App-logo {
@@ -20,6 +26,11 @@
 
 .App-intro {
   font-size: large;
+}
+
+.test-case {
+  display: flex;
+  background-color: red;
 }
 
 @keyframes App-logo-spin {
