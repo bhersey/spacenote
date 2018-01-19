@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "animejs": "^2.2.0",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.12.3",
     "node-sass-chokidar": "0.0.3",
     "react": "^16.2.0",
     "react-anime": "^2.0.1",
