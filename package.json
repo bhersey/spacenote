@@ -1,23 +1,27 @@
 {
-  "name": "spacenote",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "animejs": "^2.2.0",
-    "express-graphql": "^0.6.11",
-    "graphql": "^0.12.3",
-    "node-sass-chokidar": "0.0.3",
-    "react": "^16.2.0",
-    "react-anime": "^2.0.1",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
-  },
+  "name": "spacenote_express",
+  "version": "1.0.0",
+  "description": "server component of spacenote site",
+  "main": "index.js",
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhersey/spacenote.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhersey/spacenote/issues"
+  },
+  "homepage": "https://github.com/bhersey/spacenote#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
   }
 }
