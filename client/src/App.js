@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import musicmetadata from 'musicmetadata';
-import LogoAnimation from "./logo/LogoAnimation";
-import Track from "./trackdisplay/TrackDisplay";
+import LogoAnimation from "./views/logo/LogoAnimation";
+import Track from "./views/trackdisplay/TrackDisplay";
 import './App.css';
+import TrackDisplayContainer from "./views/trackdisplay/TrackDisplayContainer";
 
 class App extends Component {
 
@@ -57,6 +58,7 @@ class App extends Component {
             let jsonRes = result;
             console.log(jsonRes);
             let newTrack = <Track
+                            key={jsonRes.title}
                             title={jsonRes.title}
                             artist={jsonRes.artist}
                             album={jsonRes.album}
@@ -66,7 +68,7 @@ class App extends Component {
 
 
             this.setState({
-                tracks: [...this.state.tracks, newTrack]
+                tracks: [...this.state.tracks, 3]
             })
             // if (result.picture.length > 0) {
             //     var picture = result.picture[0];
@@ -83,11 +85,13 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                {/*{this.state.response ? <LogoAnimation/> : null}*/}
+                <div>><LogoAnimation/></div>
 
                 <p className="App-intro">{this.state.response || "this is some junk"}</p>
 
-                {this.state.tracks}
+                <TrackDisplayContainer
+                    tracks = {this.state.tracks}
+                />
 
             </div>
         );

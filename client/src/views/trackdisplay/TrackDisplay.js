@@ -3,6 +3,7 @@ import './TrackDisplay.css';
 
 let TrackDisplay = (props, state) => (
 
+
     <div className="track">
         <div>Title: {props.title}</div>
         <div>Artist: {props.artist}</div>
