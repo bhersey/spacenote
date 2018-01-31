@@ -20,7 +20,7 @@ class App extends Component {
 
     componentDidMount() {
         this.callApi()
-            .then(res => this.parseMP3Files(res.express))
+            // .then(res => this.parseMP3Files(res.express))
             .catch(err => console.log(err));
     }
 
