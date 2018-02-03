@@ -1,0 +1,11 @@
+.play-button {
+  display: flex;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-color: green;
+
+  .active {
+    background-color: red;
+  }
+}

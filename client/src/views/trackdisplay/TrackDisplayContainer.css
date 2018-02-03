@@ -1,0 +1,9 @@
+.track-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start; }
+  .track-container ul {
+    text-align: left;
+    color: white; }
+    .track-container ul li a {
+      color: white; }

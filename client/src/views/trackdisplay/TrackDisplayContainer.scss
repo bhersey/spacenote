@@ -1,0 +1,17 @@
+
+
+.track-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start;
+
+  ul {
+    text-align: left;
+    color: white;
+
+    li a {
+      color: white;
+    }
+  }
+
+}

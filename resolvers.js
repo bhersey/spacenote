@@ -1,5 +1,6 @@
 // import Neo4j driver
 import {v1 as neo4j} from 'neo4j-driver';
+import {localAudioPath} from "./constants";
 
 // create Neo4j driver instance, here we use a Neo4j Sandbox instance. See neo4j.com/sandbox-v2, Recommendations example dataset
 let driver = neo4j.driver("bolt://localhost:7687/", neo4j.auth.basic("neo4j", "p0lih4l3"));
@@ -7,8 +8,11 @@ let driver = neo4j.driver("bolt://localhost:7687/", neo4j.auth.basic("neo4j", "p
 const resolveFunctions = {
     Query: {
 
+        hello: () => {return "Hello from server!"},
+
+        getAudioFilePath: () => {return localAudioPath},
+
         getTrack(_, params) {
-            // query Neo4j for matching tracks
             let session = driver.session();
             let query = "MATCH (t:Track) WHERE t.filename=$filename RETURN t as track;"
             return session.run(query, params)
@@ -19,7 +23,7 @@ const resolveFunctions = {
         },
         getAllTracks() {
             let session = driver.session();
-            let query = "MATCH (t:Track) RETURN t as track;"
+            let query = "MATCH (t:Track) RETURN t as track ORDER BY t.title;"
             return session.run(query)
                 .then(result => {
 

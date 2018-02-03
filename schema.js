@@ -5,6 +5,10 @@ import { makeExecutableSchema } from 'graphql-tools';
 import resolvers from './resolvers';
 
 const typeDefs = `
+ type Hello {
+    hello: String!
+ }
+ 
  type Track {
     filename: String!
     title: String
@@ -14,7 +18,6 @@ const typeDefs = `
     genre: [String]
     duration: Float
   }
-
  
  input TrackInput {
     filename: String!
@@ -35,6 +38,7 @@ const typeDefs = `
  type Query {
     getTrack (filename:String!): Track
     getAllTracks: [Track]
+    getAudioFilePath: String!
     hello: String
  }
  

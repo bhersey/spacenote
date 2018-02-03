@@ -70,3 +70,6 @@ src/App.css
 # OSX misc
 .DS_Store
 /design
+
+client/public/audio/*
+.env

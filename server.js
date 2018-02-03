@@ -8,13 +8,15 @@ import musicmetadata from 'musicmetadata';
 import schema from './schema';
 import {graphiqlExpress, graphqlExpress} from 'graphql-server-express';
 import {createApolloFetch} from 'apollo-fetch';
+import {pathToClientAudioFiles} from 'constants';
 
 const app = express().use('*', cors());
 const port = process.env.PORT || 5000;
 const uri = 'http://localhost:5000/graphql/';
 const apolloFetch = createApolloFetch({ uri });
 
-const pathToClientAudioFiles = 'client/public/audio/';
+// const pathToClientAudioFiles = 'client/public/audio/';
+// const localAudioPath = './audio/';
 
 app.use('/graphql', morgan('combined'), bodyParser.json(), graphqlExpress({
     schema,
@@ -46,12 +48,12 @@ watcher
 function checkForNewFile(fp) {
 
     let fileNameWithoutPath = fp.replace(pathToClientAudioFiles,'');
-    console.log('File', fileNameWithoutPath, 'has been added');
+    // console.log('File', fileNameWithoutPath, 'has been added');
     apolloFetch({query: `{getAllTracks {filename}}`})
         .then(result => {
             const {data, errors, extensions} = result;
 
-            console.log("RETURN TRIP", data.getAllTracks);
+            // console.log("RETURN TRIP", data.getAllTracks);
 
             let dbFiles = data.getAllTracks;
             let fileExists = dbFiles.find( function( file ){
@@ -72,7 +74,7 @@ function addNewFile(path) {
 
     let mData = getMetaData(path)
         .then( (res) => {
-            // console.log("MDATA", res);
+            console.log("MDATA", res);
 
             apolloFetch({query: `mutation addNewTrack($input: TrackInput! ) {
                                   addNewTrack(input: $input) {
@@ -103,7 +105,7 @@ function addNewFile(path) {
             })
 
         }
-    );
+    ).catch( (err)=>console.log("ERROR: ", err));
 }
 
 function getMetaData(path) {
