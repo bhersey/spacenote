@@ -8,7 +8,7 @@ import musicmetadata from 'musicmetadata';
 import schema from './schema';
 import {graphiqlExpress, graphqlExpress} from 'graphql-server-express';
 import {createApolloFetch} from 'apollo-fetch';
-import {pathToClientAudioFiles} from 'constants';
+import {pathToClientAudioFiles} from './constants';
 
 const app = express().use('*', cors());
 const port = process.env.PORT || 5000;
@@ -26,7 +26,6 @@ app.use('/graphql', morgan('combined'), bodyParser.json(), graphqlExpress({
 app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql'
 }));
-
 
 let watcher = chokidar.watch(pathToClientAudioFiles, {ignored: "client/public/audio/.DS_Store", persistent: true});
 
@@ -48,7 +47,7 @@ watcher
 function checkForNewFile(fp) {
 
     let fileNameWithoutPath = fp.replace(pathToClientAudioFiles,'');
-    // console.log('File', fileNameWithoutPath, 'has been added');
+    console.log('File', fileNameWithoutPath, 'has been added');
     apolloFetch({query: `{getAllTracks {filename}}`})
         .then(result => {
             const {data, errors, extensions} = result;

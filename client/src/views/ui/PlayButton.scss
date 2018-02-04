@@ -3,9 +3,9 @@
   cursor: pointer;
   width: 20px;
   height: 20px;
-  background-color: green;
+  background-color: limegreen;
 
-  .active {
-    background-color: red;
+  &.active {
+    background-color: darkred;
   }
 }

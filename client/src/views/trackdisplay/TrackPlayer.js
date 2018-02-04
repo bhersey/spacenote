@@ -4,13 +4,12 @@ import {GET_TRACK} from "../../graphql/queries";
 import PlayButton from '../ui/PlayButton'
 import './TrackPlayer.css';
 
-let TrackPlayer = ({data: {loading, getTrack}}) => {
-
+let TrackPlayer = ({data: {loading, error, getTrack, variables}}) => {
 
     if (loading) {
         return <div>Loading</div>;
     } else {
-        console.log("DATA", getTrack, this);
+        console.log("DATA", variables.isPlaying);
 
         return (
 
@@ -21,11 +20,11 @@ let TrackPlayer = ({data: {loading, getTrack}}) => {
                 <div>Year: {getTrack.year || ''}</div>
                 <div>Genre: {getTrack.genre || ''}</div>
                 <div>Duration: {getTrack.duration || ''}</div>
-                {/*<div>Is Playing: {getTrack.isPlaying.toString()}</div>*/}
-                {/*<PlayButton*/}
-                {/*isPlaying={data.isPlaying}*/}
-                {/*toggleAudio={data.toggleAudio}*/}
-                {/*filename={data.filename}/>*/}
+                <div>Is Playing: {variables.isPlaying.toString()}</div>
+                <PlayButton
+                    isPlaying={variables.isPlaying}
+                    toggleAudio={variables.toggleAudio}
+                />
             </div>
         );
     }
@@ -33,6 +32,6 @@ let TrackPlayer = ({data: {loading, getTrack}}) => {
 
 export default graphql(GET_TRACK, {
     options: (props) => ({
-        variables: {input: props.filename},
+        variables: {input: props.filename, isPlaying: props.isPlaying, toggleAudio: props.toggleAudio}
     })
 })(TrackPlayer);

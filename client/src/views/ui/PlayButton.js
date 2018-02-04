@@ -4,10 +4,8 @@ import './PlayButton.css';
 
 
 const PlayButton = (props, state) => (
-
-
-    <button className={`play-button ${props.isPlaying ? 'active' : ''}`}  onClick={() => props.toggleAudio(props.filename)}>
-        HEY {props.isPlaying}
+    <button className={`play-button ${props.isPlaying ? 'active' : ''}`}  onClick={() => props.toggleAudio()}>
+        PLAY
     </button>
 );
 

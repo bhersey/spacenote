@@ -1,8 +1,8 @@
 .play-button {
   display: flex;
   cursor: pointer;
-  width: 20px;
+  width: 50px;
   height: 20px;
-  background-color: green; }
-  .play-button .active {
-    background-color: red; }
+  background-color: limegreen; }
+  .play-button.active {
+    background-color: darkred; }
