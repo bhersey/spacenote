@@ -71,5 +71,5 @@ src/App.css
 .DS_Store
 /design
 
-# client/public/audio/*
+client/public/audio/
 .env
