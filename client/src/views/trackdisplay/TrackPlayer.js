@@ -6,10 +6,14 @@ import './TrackPlayer.css';
 
 let TrackPlayer = ({data: {loading, error, getTrack, variables}}) => {
 
+    // console.log("DATA", loading, getTrack, error);
+
     if (loading) {
         return <div>Loading</div>;
+
     } else {
-        console.log("DATA", variables.isPlaying);
+
+
 
         return (
 
@@ -20,7 +24,6 @@ let TrackPlayer = ({data: {loading, error, getTrack, variables}}) => {
                 <div>Year: {getTrack.year || ''}</div>
                 <div>Genre: {getTrack.genre || ''}</div>
                 <div>Duration: {getTrack.duration || ''}</div>
-                <div>Is Playing: {variables.isPlaying.toString()}</div>
                 <PlayButton
                     isPlaying={variables.isPlaying}
                     toggleAudio={variables.toggleAudio}
@@ -32,6 +35,7 @@ let TrackPlayer = ({data: {loading, error, getTrack, variables}}) => {
 
 export default graphql(GET_TRACK, {
     options: (props) => ({
-        variables: {input: props.filename, isPlaying: props.isPlaying, toggleAudio: props.toggleAudio}
+        variables: {input: props.id, isPlaying: props.isPlaying, toggleAudio: props.toggleAudio},
+        errorPolicy: 'all'
     })
 })(TrackPlayer);

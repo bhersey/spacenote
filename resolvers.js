@@ -8,29 +8,43 @@ let driver = neo4j.driver("bolt://localhost:7687/", neo4j.auth.basic("neo4j", "p
 const resolveFunctions = {
     Query: {
 
-        hello: () => {return "Hello from server!"},
+        hello: () => {
+            return "Hello from server!"
+        },
 
-        getAudioFilePath: () => {return localAudioPath},
+        getAudioFilePath: () => {
+            return localAudioPath
+        },
 
         getTrack(_, params) {
             let session = driver.session();
-            let query = "MATCH (t:Track) WHERE t.filename=$filename RETURN t as track;"
+            let query = "MATCH (t:Track) WHERE t.uuid=$id RETURN t as track;"
             return session.run(query, params)
                 .then(result => {
-                        return result.records[0].get("track").properties
-                    }
-                )
+                    session.close();
+                    return result.records[0].get("track").properties
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         },
         getAllTracks() {
             let session = driver.session();
-            let query = "MATCH (t:Track) RETURN t as track ORDER BY t.title;"
+            let query = "MATCH (t:Track) RETURN t as track, t.uuid as id ORDER BY t.title;"
             return session.run(query)
                 .then(result => {
-
+                    session.close();
                     return result.records.map(record => {
+                        // console.log("PROPERTIES", record.get('id'), record.get("track").properties);
+                        record.get("track").properties.id = record.get('id');
                         return record.get("track").properties
                     })
+
                 })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     },
     Mutation: {
@@ -39,7 +53,22 @@ const resolveFunctions = {
             let query = "CREATE (t:Track{filename: $input.filename, title: $input.title, artist: $input.artist, album: $input.album, year: $input.year, duration: $input.duration}) RETURN t as track;";
             return session.run(query, params)
                 .then(result => {
+                    session.close();
                     // console.log("ADD TRACK RESULT", result.records[0].get("track").properties);
+                    return result.records[0].get("track").properties
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        updatePlayCount(_, params) {
+            let session = driver.session();
+            let query = "MATCH (t:Track {uuid: $input.id}) SET t.playCount=$input.newCount RETURN t as track, t.uuid as id;";
+            return session.run(query, params)
+                .then(result => {
+                    session.close();
+                    console.log("UPDATE PLAYS RESULT", result.records[0].get("track").properties);
+                    result.records[0].get("track").properties.id = result.records[0].get('id');
                     return result.records[0].get("track").properties
                 })
         }

@@ -6,4 +6,7 @@
     text-align: left;
     color: white; }
     .track-container ul li a {
+      cursor: pointer;
       color: white; }
+    .track-container ul li a:hover, .track-container ul a.hover {
+      text-decoration: underline; }

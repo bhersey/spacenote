@@ -9,9 +9,8 @@
     text-align: left;
     color: white;
 
-    li a {
-      color: white;
-    }
+    li a { cursor: pointer; color: white; }
+    li a:hover,a.hover { text-decoration: underline; }
   }
 
 }

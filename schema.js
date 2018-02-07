@@ -10,6 +10,7 @@ const typeDefs = `
  }
  
  type Track {
+    id: ID!
     filename: String!
     title: String
     artist: [String]
@@ -17,6 +18,7 @@ const typeDefs = `
     year: Int
     genre: [String]
     duration: Float
+    playCount: Int
   }
  
  input TrackInput {
@@ -29,14 +31,13 @@ const typeDefs = `
     duration: Float
  }
  
- type CreateTrackPayload {
-  # The todo that was created. It is nullable so that if there is
-  # an error then null won’t propagate past the \`todo\`.
-  track: Track
-  }
+ input CountUpdate {
+    id: ID!
+    newCount: Int!
+ }
  
  type Query {
-    getTrack (filename:String!): Track
+    getTrack (id:String!): Track
     getAllTracks: [Track]
     getAudioFilePath: String!
     hello: String
@@ -44,6 +45,7 @@ const typeDefs = `
  
  type Mutation {
    addNewTrack (input:TrackInput): Track
+   updatePlayCount (input: CountUpdate): Track
   }
 `;
 

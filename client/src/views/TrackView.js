@@ -1,19 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TrackDisplayContainer from "./trackdisplay/TrackDisplayContainer";
+import './TrackView.css'
 
-class TrackView extends Component {
-    constructor(props) {
-        super(props);
-    }
+const TrackView = (props) => {
 
-
-    render() {
         return (
-            <div>
+            <div className="track-view">
                 <TrackDisplayContainer />
             </div>
         )
-    }
-}
+};
 
 export default TrackView;

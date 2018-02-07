@@ -10,6 +10,7 @@ export const GET_ALL_TRACKS = gql`
 {
   getAudioFilePath
   getAllTracks{
+    id
     filename
     title
     artist
@@ -21,12 +22,21 @@ export const GET_ALL_TRACKS = gql`
 
 export const GET_TRACK = gql`
 query GetTrack($input: String!) {
-    getTrack(filename: $input) {
-        title
-        artist
-        album
-        year
-        genre
-        duration
-    }
+  getTrack(id: $input) {
+    filename
+    title
+    artist
+    album
+    year
+    genre
+    duration
+  }
+}`;
+
+export  const UPDATE_PLAY_COUNT = gql`
+mutation UpdatePLays($input: CountUpdate) {
+  updatePlayCount(input: $input) {
+    id
+    playCount
+  }
 }`;
