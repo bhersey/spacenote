@@ -1,0 +1,12 @@
+.video-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-start; }
+  .video-container ul {
+    text-align: left;
+    color: white; }
+    .video-container ul li a {
+      cursor: pointer;
+      color: white; }
+    .video-container ul li a:hover, .video-container ul a.hover {
+      text-decoration: underline; }

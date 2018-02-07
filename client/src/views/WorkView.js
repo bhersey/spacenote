@@ -1,12 +1,13 @@
 import React from 'react';
-import {graphql} from 'react-apollo'
-import * as queries from '../graphql/queries'
+import VideoDisplayContainer from "./videodisplay/VideoDisplayContainer";
+// import './WorkView.css'
 
 const WorkView = (props) => {
 
     return (
-        <div>
+        <div className="work-view">
             WORK VIEW
+            <VideoDisplayContainer />
         </div>
     )
 };

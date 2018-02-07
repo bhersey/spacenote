@@ -11,14 +11,12 @@ const resolveFunctions = {
         hello: () => {
             return "Hello from server!"
         },
-
         getAudioFilePath: () => {
             return localAudioPath
         },
-
-        getTrack(_, params) {
+        getTrack: function (_, params) {
             let session = driver.session();
-            let query = "MATCH (t:Track) WHERE t.uuid=$id RETURN t as track;"
+            let query = "MATCH (t:Track) WHERE t.uuid=$id RETURN t as track;";
             return session.run(query, params)
                 .then(result => {
                     session.close();
@@ -26,12 +24,12 @@ const resolveFunctions = {
 
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log("neo4j driver ERROR", error);
                 });
         },
-        getAllTracks() {
+        getAllTracks: function () {
             let session = driver.session();
-            let query = "MATCH (t:Track) RETURN t as track, t.uuid as id ORDER BY t.title;"
+            let query = "MATCH (t:Track) RETURN t as track, t.uuid as id ORDER BY t.title;";
             return session.run(query)
                 .then(result => {
                     session.close();
@@ -43,7 +41,36 @@ const resolveFunctions = {
 
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log("neo4j driver ERROR", error);
+                });
+        },
+        getVideo: function (_, params) {
+            let session = driver.session();
+            let query = "MATCH (v:Video) WHERE v.uuid=$id RETURN v as video;";
+            return session.run(query, params)
+                .then(result => {
+                    session.close();
+                    return result.records[0].get("video").properties
+                })
+                .catch(function (error) {
+                    console.log("neo4j driver ERROR", error);
+                });
+        },
+        getAllVideos: function () {
+            let session = driver.session();
+            let query = "MATCH (v:Video) RETURN v as video, v.uuid as id ORDER BY v.client;";
+            return session.run(query)
+                .then(result => {
+                    session.close();
+                    return result.records.map(record => {
+                        console.log("VIDEO PROPERTIES", record.get('id'), record.get("video").properties);
+                        record.get("video").properties.id = record.get('id');
+                        return record.get("video").properties
+                    })
+
+                })
+                .catch(function (error) {
+                    console.log("neo4j driver ERROR", error);
                 });
         }
     },

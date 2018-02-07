@@ -20,6 +20,18 @@ const typeDefs = `
     duration: Float
     playCount: Int
   }
+  
+  type Video {
+    id: ID!
+    url: String!
+    title: String
+    client: String
+    description: String
+    director: String
+    agency: String
+    year: Int
+    category: [String]
+  }
  
  input TrackInput {
     filename: String!
@@ -39,6 +51,8 @@ const typeDefs = `
  type Query {
     getTrack (id:String!): Track
     getAllTracks: [Track]
+    getVideo (id:String!): Video
+    getAllVideos: [Video]
     getAudioFilePath: String!
     hello: String
  }

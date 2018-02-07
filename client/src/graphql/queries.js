@@ -40,3 +40,34 @@ mutation UpdatePLays($input: CountUpdate) {
     playCount
   }
 }`;
+
+
+//VIDEO
+export const GET_ALL_VIDEOS = gql`
+{
+  getAllVideos {
+    id
+    url
+    title
+    client
+    director
+    description
+    agency
+    year
+    category
+  }
+}`;
+
+export const GET_VIDEO = gql`
+  query GetVideo($input: String!) {
+  getVideo(id: $input) {
+    url
+    title
+    client
+    agency
+    director
+    description
+    year
+    category
+  }
+}`;

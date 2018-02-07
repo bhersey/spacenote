@@ -2,7 +2,10 @@ import React from 'react';
 import Anime from 'react-anime';
 import './LogoAnimation.css';
 
-let LogoAnimation = (props, state) => {
+const LogoAnimation = (props, state) => {
+
+
+        //lets think of an interesting way to use props here, or even apollo to change state with data (or else remove the arguments)
 
         return (
 
@@ -64,7 +67,6 @@ let LogoAnimation = (props, state) => {
                                    }
                                    return [pathLength, 0];
                                }}>
-
 
                             <path className="st1"
                                   d="M338.06,34.05c0,4.54,1.73,9.43,7.27,9.43,4.46,0,5.83-2.81,6.41-4.46h9.58c-1.8,6.19-6.19,12.1-16.27,12.1-11.88,0-16.85-8.14-16.85-19.23,0-9.22,4.61-19.44,17.28-19.44S361.75,21.38,361.75,31c0,.5-.07,2.45-.14,3Zm14.18-6.41c-.14-4.18-1.87-7.85-6.91-7.85-5.54,0-6.91,4.54-7.13,7.85Z"/>
