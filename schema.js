@@ -41,6 +41,7 @@ const typeDefs = `
     year: Int
     genre: [String]
     duration: Float
+    playCount: Int
  }
  
  input CountUpdate {

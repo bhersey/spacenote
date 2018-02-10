@@ -1,18 +1,34 @@
 import React from 'react';
-import {graphql} from 'react-apollo'
-import * as queries from '../graphql/queries'
+import Anime from 'react-anime';
+import {compose, lifecycle, pure} from 'recompose';
 import LogoAnimation from "./logo/LogoAnimation";
+import {PAGE_TRANSITION} from "../animation/animConstants";
 
-const MyComponentWithData = graphql(queries.HELLO)(props => <div>{props.data.hello}</div>);
-
-const LandingView = (props) => {
+const LandingView = ({contentToAnimate}, props) => {
 
     return (
         <div>
-            <LogoAnimation/>
-            <MyComponentWithData/>
+            {contentToAnimate}
         </div>
     )
 };
 
-export default LandingView;
+const withLifeCycle = lifecycle({
+    componentWillMount() {
+        this.setState({
+            contentToAnimate:
+                <Anime {...PAGE_TRANSITION}>
+                    <div className="landing-view">
+                        <LogoAnimation/>
+                    </div>
+                </Anime>
+        })
+    }
+});
+
+const EnhancedLandingView = compose(
+    withLifeCycle,
+    pure
+)(LandingView);
+
+export default EnhancedLandingView

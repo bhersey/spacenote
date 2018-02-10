@@ -73,7 +73,7 @@ function addNewFile(path) {
 
     let mData = getMetaData(path)
         .then( (res) => {
-            console.log("MDATA", res);
+            console.log("MDATA", res, res.genre, typeof(res.genre));
 
             apolloFetch({query: `mutation addNewTrack($input: TrackInput! ) {
                                   addNewTrack(input: $input) {
@@ -94,13 +94,14 @@ function addNewFile(path) {
                                 "album": res.album,
                                 "year": res.year,
                                 "genre": res.genre,
-                                "duration": res.duration
+                                "duration": res.duration,
+                                "playCount": 0
                             }
                         }
             }).then(result => {
                 const {data, errors, extensions} = result;
 
-                console.log("RETURN FROM ADD TRACK", data);
+                console.log("RETURN FROM ADD TRACK", data, errors);
             })
 
         }

@@ -1,41 +1,23 @@
 import React from 'react';
-import {graphql} from 'react-apollo'
-import {GET_TRACK} from "../../graphql/queries";
 import PlayButton from '../ui/PlayButton'
 import './TrackPlayer.css';
 
-let TrackPlayer = ({data: {loading, error, getTrack, variables}}) => {
+let TrackPlayer = (props) => {
 
-    // console.log("DATA", loading, getTrack, error);
-
-    if (loading) {
-        return <div>Loading</div>;
-
-    } else {
-
-
-
-        return (
-
-            <div className="track">
-                <div>Title: {getTrack.title || ''}</div>
-                <div>Artist: {getTrack.artist || ''}</div>
-                <div>Album: {getTrack.album || ''}</div>
-                <div>Year: {getTrack.year || ''}</div>
-                <div>Genre: {getTrack.genre || ''}</div>
-                <div>Duration: {getTrack.duration || ''}</div>
-                <PlayButton
-                    isPlaying={variables.isPlaying}
-                    toggleAudio={variables.toggleAudio}
-                />
-            </div>
-        );
-    }
+    return (
+        <div className="track">
+            <div>Title: {props.track.title || ''}</div>
+            <div>Artist: {props.track.artist || ''}</div>
+            <div>Album: {props.track.album || ''}</div>
+            <div>Year: {props.track.year || ''}</div>
+            <div>Genre: {props.track.genre || ''}</div>
+            <div>Duration: {props.track.duration || ''}</div>
+            <PlayButton
+                isPlaying={props.isPlaying}
+                toggleAudio={props.toggleAudio}
+            />
+        </div>
+    );
 };
 
-export default graphql(GET_TRACK, {
-    options: (props) => ({
-        variables: {input: props.id, isPlaying: props.isPlaying, toggleAudio: props.toggleAudio},
-        errorPolicy: 'all'
-    })
-})(TrackPlayer);
+export default TrackPlayer;

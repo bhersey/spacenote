@@ -16,10 +16,11 @@ const resolveFunctions = {
         },
         getTrack: function (_, params) {
             let session = driver.session();
-            let query = "MATCH (t:Track) WHERE t.uuid=$id RETURN t as track;";
+            let query = "MATCH (t:Track) WHERE t.uuid=$id RETURN t as track, t.uuid as id;";
             return session.run(query, params)
                 .then(result => {
                     session.close();
+                    result.records[0].get("track").properties.id = result.records[0].get('id');
                     return result.records[0].get("track").properties
 
                 })
@@ -77,7 +78,7 @@ const resolveFunctions = {
     Mutation: {
         addNewTrack(_, params) {
             let session = driver.session();
-            let query = "CREATE (t:Track{filename: $input.filename, title: $input.title, artist: $input.artist, album: $input.album, year: $input.year, duration: $input.duration}) RETURN t as track;";
+            let query = "CREATE (t:Track{filename: $input.filename, title: $input.title, artist: $input.artist, album: $input.album, year: $input.year, genre: $input.genre, duration: $input.duration, playCount: $input.playCount}) RETURN t as track;";
             return session.run(query, params)
                 .then(result => {
                     session.close();

@@ -1,27 +1,21 @@
 import React, {Component} from 'react';
-import {graphql} from 'react-apollo';
-import { withApollo } from 'react-apollo';
+import {graphql, withApollo} from 'react-apollo';
 import ReactPlayer from 'react-player'
-import {GET_ALL_VIDEOS, GET_VIDEO} from "../../graphql/queries";
+import {GET_ALL_VIDEOS} from "../../graphql/queries";
 import './VideoDisplayContainer.css'
 
 class VideoDisplayContainer extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         videos: [],
         videoID: '',
-        playerFile: '',
         videoURL: '',
         isPlaying: false
     };
-    
+
     loadVideoPlayerAndPlay(id, url) {
         console.log("VIDEO: ", id, url)
-        let player = this.rplayer;
+        // let player = this.rplayer;
         this.setState({
             videoURL: id,
         });
@@ -45,12 +39,11 @@ class VideoDisplayContainer extends Component {
                 videos: propsToString,
                 videoURL: nextProps.data.getAllVideos[0].url,
                 videoID: nextProps.data.getAllVideos[0].id,
-                playerFile: nextProps.data.getAllVideos[0].filename
             })
             console.log("STATE", this.state);
         }
     }
-       
+
     render() {
 
         const {data} = this.props;
@@ -58,16 +51,15 @@ class VideoDisplayContainer extends Component {
         if (!data.loading) {
 
             return (
-
                 <div className="video-container">
+                    <div>
+                        <ul>{this.state.videos}</ul>
                         <div>
-                            <ul>{this.state.videos}</ul>
-                            <div>
-                                <ReactPlayer
-                                    ref={(c) => this.rplayer = c}
-                                    url={this.state.videoURL} playing />
-                            </div>
+                            <ReactPlayer
+                                ref={(c) => this.rplayer = c}
+                                url={this.state.videoURL} />
                         </div>
+                    </div>
                 </div>
             )
         } else {
@@ -76,5 +68,6 @@ class VideoDisplayContainer extends Component {
 
     }
 }
+
 let GraphQLVideoDisplayContainer = graphql(GET_ALL_VIDEOS)(VideoDisplayContainer);
 export default withApollo(GraphQLVideoDisplayContainer);

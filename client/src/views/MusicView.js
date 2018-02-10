@@ -1,14 +1,38 @@
 import React from 'react';
+import Anime from 'react-anime';
+import {compose, lifecycle, pure} from 'recompose';
 import TrackDisplayContainer from "./trackdisplay/TrackDisplayContainer";
-import './TrackView.css'
+import {PAGE_TRANSITION} from "../animation/animConstants";
+import './MusicView.css'
 
-const TrackView = (props) => {
+const MusicView = ({contentToAnimate}, props) => {
 
-        return (
-            <div className="track-view">
-                <TrackDisplayContainer />
-            </div>
-        )
+    console.log("MusicView", props);
+
+    return (
+        <div>
+            {contentToAnimate}
+        </div>
+    )
 };
 
-export default TrackView;
+const withLifeCycle = lifecycle({
+    componentWillMount() {
+        this.setState({
+            contentToAnimate:
+                <Anime {...PAGE_TRANSITION} >
+                    <div className="music-view">
+                        MUSIC VIEW
+                        <TrackDisplayContainer/>
+                    </div>
+                </Anime>
+        })
+    }
+});
+
+const EnhancedMusicView = compose(
+    withLifeCycle,
+    pure
+)(MusicView);
+
+export default EnhancedMusicView

@@ -6,6 +6,11 @@ export const HELLO = gql`
 {hello}
 `;
 
+export const INIT_GENRE = gql`
+{
+  genre
+}`;
+
 export const GET_ALL_TRACKS = gql`
 {
   getAudioFilePath
@@ -14,9 +19,11 @@ export const GET_ALL_TRACKS = gql`
     filename
     title
     artist
+    album
     year
     genre
     duration
+    playCount
   }
 }`;
 
@@ -30,11 +37,12 @@ query GetTrack($input: String!) {
     year
     genre
     duration
+    playCount
   }
 }`;
 
 export  const UPDATE_PLAY_COUNT = gql`
-mutation UpdatePLays($input: CountUpdate) {
+mutation UpdatePlays($input: CountUpdate) {
   updatePlayCount(input: $input) {
     id
     playCount
