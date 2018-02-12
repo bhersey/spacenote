@@ -4,9 +4,9 @@ import {compose, lifecycle, pure} from 'recompose';
 import {PAGE_TRANSITION} from "../animation/animConstants";
 // import './StudioView.css'
 
-const StudioView = ({contentToAnimate}, props) => {
+const StudioView = ({contentToAnimate}) => {
 
-    console.log("StudioView", props);
+    console.log("StudioView");
 
     return (
         <div>

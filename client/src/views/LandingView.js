@@ -4,7 +4,7 @@ import {compose, lifecycle, pure} from 'recompose';
 import LogoAnimation from "./logo/LogoAnimation";
 import {PAGE_TRANSITION} from "../animation/animConstants";
 
-const LandingView = ({contentToAnimate}, props) => {
+const LandingView = ({contentToAnimate}) => {
 
     return (
         <div>

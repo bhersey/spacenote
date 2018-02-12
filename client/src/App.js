@@ -13,20 +13,23 @@ class App extends Component {
 // const App = ({data: {loading, error, genre}}) => {
 
     state = {
-        genre: 'default'
+        genre: ''
     };
 
-    componentWillReceiveProps(newProps){
-        if (newProps) {
-            console.log("NEW PROPS", newProps);
-            this.setState({genre: newProps.data.variables.genre})
-        }
-    }
+    // componentWillMount() {
+    //     console.log("MOUNT", this.props.data.variables.genre)
+    //     this.setState({genre: this.props.data.variables.genre})
+    // }
+    //
+    // componentDidUpdate(nextProps) {
+    //     console.log("NEXT", nextProps.data.genre)
+    //     this.setState({genre: nextProps.data.genre})
+    // }
 
     render() {
-        // if (this.props.data.loading) return <div>LOADING</div>;
-
+        if (this.props.data.error || this.props.data.loading) return <div>LOADING</div>;
         return (
+
             <Router>
                 <div className="App">
                     <nav>
@@ -39,7 +42,7 @@ class App extends Component {
                         </ul>
 
                     </nav>
-                    {/*<div>{this.state.genre}</div>*/}
+                    <div>{this.props.data.genre || this.props.data.variables.genre}</div>
                     <Route exact path="/" component={LandingView}/>
                     <Route exact path="/work/" component={WorkView}/>
                     <Route exact path="/music/" component={MusicView}/>
@@ -54,11 +57,17 @@ class App extends Component {
         );
     }
 }
+
 const AppWithGraphQL = graphql(INIT_GENRE, {
     options: {
-        variables: {genre: 'default'},
+        variables: {"genre": 'Default'},
         fetchPolicy: 'cache-only',
         errorPolicy: 'all'
     }
 })(App);
 export default AppWithGraphQL;
+//
+// options: (props) => ({
+//     variables: {input: props.id, isPlaying: props.isPlaying, toggleAudio: props.toggleAudio},
+//     errorPolicy: 'all'
+// })

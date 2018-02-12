@@ -5,9 +5,9 @@ import {PAGE_TRANSITION} from "../animation/animConstants";
 import VideoDisplayContainer from "./videodisplay/VideoDisplayContainer";
 // import './WorkView.css'
 
-const WorkView = ({contentToAnimate}, props) => {
+const WorkView = ({contentToAnimate}) => {
 
-    console.log("WorkView", props);
+    console.log("WorkView");
 
     return (
         <div>

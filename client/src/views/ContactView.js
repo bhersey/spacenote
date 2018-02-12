@@ -4,9 +4,9 @@ import {compose, lifecycle, pure} from 'recompose';
 import {PAGE_TRANSITION} from "../animation/animConstants";
 // import './ContactView.css'
 
-const ContactView = ({contentToAnimate}, props) => {
+const ContactView = ({contentToAnimate}) => {
 
-    console.log("StudioView", props);
+    console.log("ContactView");
 
     return (
         <div>
@@ -20,7 +20,7 @@ const withLifeCycle = lifecycle({
         this.setState({
             contentToAnimate:
                 <Anime {...PAGE_TRANSITION} >
-                    <div className="contact-view">
+                    <div className="contact-view" >
                         CONTACT VIEW
                     </div>
                 </Anime>

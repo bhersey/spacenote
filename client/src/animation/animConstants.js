@@ -1,5 +1,5 @@
 export const PAGE_TRANSITION = {
     easing: "easeOutCubic",
-    duration: 600,
+    duration: 700,
     opacity: [0, 1]
 };
