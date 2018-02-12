@@ -1,0 +1,8 @@
+.track-button {
+  display: flex;
+  cursor: pointer;
+  width: 260px;
+  margin: 25px;
+  background-color: darkblue;
+  align-items: center;
+  flex-flow: column; }

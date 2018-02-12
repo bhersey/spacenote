@@ -13,36 +13,30 @@ class VisualizerContainer extends Component {
         console.log("VisualizerContainer", newProps, this.state.lastColor);
 
         if (newProps.genre) {
-
             let bgContainer = this.bgContainer;
             let nextColor = GENRE_TO_COLOR_MAPPING[newProps.genre];
-
-
-
             this.createTest(bgContainer, nextColor);
         }
-
     }
 
     createTest(el, nColor) {
         anime({
             targets: el,
             backgroundColor: [this.state.lastColor, nColor],
-            easing: 'easeInOutSine',
+            easing: 'easeInOutQuad',
             duration: 1500
         });
         this.setState({
             lastColor: nColor
         })
-
     }
 
     // background-color: blueviolet;
     render() {
         return (
             <div>
-                HELLO I AM CONTAINTER {this.props.genre}
-                <div ref={(c) => this.bgContainer = c} id="hokum" >
+                HELLO I AM CONTAINER
+                <div ref={(c) => this.bgContainer = c} >
                     {this.props.children}
                 </div>
             </div>

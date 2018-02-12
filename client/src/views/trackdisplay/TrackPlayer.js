@@ -2,19 +2,20 @@ import React from 'react';
 import PlayButton from '../ui/PlayButton'
 import './TrackPlayer.css';
 
-let TrackPlayer = (props) => {
+let TrackPlayer = ({track, isPlaying, toggleAudio}) => {
 
     return (
         <div className="track">
-            <div>Title: {props.track.title || ''}</div>
-            <div>Artist: {props.track.artist || ''}</div>
-            <div>Album: {props.track.album || ''}</div>
-            <div>Year: {props.track.year || ''}</div>
-            <div>Genre: {props.track.genre || ''}</div>
-            <div>Duration: {props.track.duration || ''}</div>
+            <div>Title: {track.title || ''}</div>
+            <div>Artist: {track.artist || ''}</div>
+            <div>Album: {track.album || ''}</div>
+            <div>Year: {track.year || ''}</div>
+            <div>Genre: {track.genre || ''}</div>
+            <div>Duration: {track.duration || ''}</div>
+            <div>Plays: {track.playCount || ''}</div>
             <PlayButton
-                isPlaying={props.isPlaying}
-                toggleAudio={props.toggleAudio}
+                isPlaying={isPlaying}
+                toggleAudio={toggleAudio}
             />
         </div>
     );

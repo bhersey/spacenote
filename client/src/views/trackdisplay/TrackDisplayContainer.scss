@@ -5,12 +5,10 @@
   flex-flow: column wrap;
   align-items: flex-start;
 
-  ul {
+  .button-container {
+    display: flex;
+    flex-flow: row wrap;
     text-align: left;
     color: white;
-
-    li a { cursor: pointer; color: white; }
-    li a:hover,a.hover { text-decoration: underline; }
   }
-
 }

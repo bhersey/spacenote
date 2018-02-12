@@ -2,11 +2,8 @@
   display: flex;
   flex-flow: column wrap;
   align-items: flex-start; }
-  .track-container ul {
+  .track-container .button-container {
+    display: flex;
+    flex-flow: row wrap;
     text-align: left;
     color: white; }
-    .track-container ul li a {
-      cursor: pointer;
-      color: white; }
-    .track-container ul li a:hover, .track-container ul a.hover {
-      text-decoration: underline; }

@@ -2,7 +2,7 @@ import React from 'react';
 import Anime from 'react-anime';
 import {compose, lifecycle, pure} from 'recompose';
 import {PAGE_TRANSITION} from "../animation/animConstants";
-// import './StudioView.css'
+import './StudioView.css'
 
 const StudioView = ({contentToAnimate}) => {
 

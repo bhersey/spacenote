@@ -1,15 +1,12 @@
 
 .track {
   display: flex;
-  //flex-grow: 1;
   margin: 10px;
   flex-direction: column;
   align-items: flex-start;
   align-content: flex-start;
-  min-width: 350px;
+  width: 400px;
   min-height: 140px;
-
-
   color: #fff;
   background-color: magenta;
   border: 1px solid #fff;

@@ -30,7 +30,7 @@ const resolveFunctions = {
         },
         getAllTracks: function () {
             let session = driver.session();
-            let query = "MATCH (t:Track) RETURN t as track, t.uuid as id ORDER BY t.title;";
+            let query = "MATCH (t:Track) RETURN t as track, t.uuid as id ORDER BY t.genre;";
             return session.run(query)
                 .then(result => {
                     session.close();
