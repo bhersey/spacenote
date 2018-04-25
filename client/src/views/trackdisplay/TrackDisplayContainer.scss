@@ -2,13 +2,22 @@
 
 .track-container {
   display: flex;
+  position: relative;
   flex-flow: column wrap;
   align-items: flex-start;
 
   .button-container {
     display: flex;
+    position: absolute;
     flex-flow: row wrap;
     text-align: left;
     color: white;
+    z-index: 1;
+  }
+
+  .vis-canvas {
+    position: absolute;
+    top: 0;
+    width: 100%;
   }
 }

@@ -1,14 +1,19 @@
 import React from 'react';
 import Anime from 'react-anime';
 import {compose, lifecycle, pure} from 'recompose';
-import LogoAnimation from "./logo/LogoAnimation";
+import TrackDisplayContainer from "./trackdisplay/TrackDisplayContainer";
 import {PAGE_TRANSITION} from "../animation/animConstants";
+import VisualizerContainer from "./visualizers/VisualizerContainer";
+import {INIT_GENRE} from "../graphql/queries";
+import {graphql} from "react-apollo/index";
 
-const LandingView = ({contentToAnimate}) => {
+const LandingView = ({data: {loading, error, genre},contentToAnimate}) => {
 
     return (
         <div>
-            {contentToAnimate}
+            <VisualizerContainer {...{loading, error, genre}}>
+                {contentToAnimate}
+            </VisualizerContainer>
         </div>
     )
 };
@@ -19,16 +24,27 @@ const withLifeCycle = lifecycle({
             contentToAnimate:
                 <Anime {...PAGE_TRANSITION}>
                     <div className="landing-view">
-                        <LogoAnimation/>
+                        <TrackDisplayContainer />
                     </div>
                 </Anime>
         })
+    },
+    componentWillReceiveProps(nextProps) {
+        if (nextProps) {
+            console.log("MusicView componentWillReceiveProps",this.props.data.genre);
+        }
     }
 });
 
 const EnhancedLandingView = compose(
+    graphql(INIT_GENRE, {
+        options: {
+            fetchPolicy: 'cache-only',
+            errorPolicy: 'all'
+        }
+    }),
     withLifeCycle,
     pure
 )(LandingView);
 
-export default EnhancedLandingView
+export default EnhancedLandingView;

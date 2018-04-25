@@ -35,7 +35,6 @@ class VisualizerContainer extends Component {
     render() {
         return (
             <div>
-                HELLO I AM CONTAINER
                 <div ref={(c) => this.bgContainer = c} >
                     {this.props.children}
                 </div>

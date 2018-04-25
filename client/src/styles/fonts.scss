@@ -1,0 +1,18 @@
+
+$font-family-ministry: "ministry", "Helvetica", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+body {
+  p, li, h1, h2, h3, h4, h5 {
+    font-family: $font-family-ministry;
+  }
+  p, li {
+    font-weight: 400;
+  }
+  strong, h1, h2, h3, h4, h5 {
+    font-weight: 500;
+  }
+}
+
+
+
+

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {graphql} from 'react-apollo'
 import {BrowserRouter as Router, Link, Route} from 'react-router-dom'
 import './App.css';
+import LogoAnimation from "./views/logo/LogoAnimation";
 import MusicView from "./views/MusicView";
 import LandingView from "./views/LandingView";
 import WorkView from "./views/WorkView";
@@ -16,32 +17,25 @@ class App extends Component {
         genre: ''
     };
 
-    // componentWillMount() {
-    //     console.log("MOUNT", this.props.data.variables.genre)
-    //     this.setState({genre: this.props.data.variables.genre})
-    // }
-    //
-    // componentDidUpdate(nextProps) {
-    //     console.log("NEXT", nextProps.data.genre)
-    //     this.setState({genre: nextProps.data.genre})
-    // }
-
     render() {
         if (this.props.data.error || this.props.data.loading) return <div>LOADING</div>;
         return (
 
             <Router>
                 <div className="App">
+                    <div className="header-container">
+                    <LogoAnimation/>
+
                     <nav>
                         <ul>
                             <li><Link to="/">Home</Link></li>
                             <li><Link to="/work/">Work</Link></li>
-                            <li><Link to="/music/">Tracks</Link></li>
                             <li><Link to="/studio/">Studio</Link></li>
                             <li><Link to="/contact/">Contact</Link></li>
                         </ul>
 
                     </nav>
+                    </div>
                     <div>{this.props.data.genre || this.props.data.variables.genre}</div>
                     <Route exact path="/" component={LandingView}/>
                     <Route exact path="/work/" component={WorkView}/>
